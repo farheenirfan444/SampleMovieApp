@@ -58,7 +58,6 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         cell.titleLabel.text = movie.title
         cell.posterImage.backgroundColor = .red
         return cell
-        
     }
     
     
