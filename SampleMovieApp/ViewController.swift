@@ -8,12 +8,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let genres = ["Action", "Adventure","Adventure", "Drama", "Comedy", "Crime",  "Documentary", "Sports", "Fantasy", "Horror", "Music", "Western","Horhor", "Thriller", "Sci-fi"]
+    @IBOutlet var genreCollectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        genreCollectionView.isScrollEnabled = true
+        if let layout = genreCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+        
     }
-
-
+   
 }
-
