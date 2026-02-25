@@ -9,8 +9,10 @@ import UIKit
 
 class OnBoardingScreen1ViewController: UIViewController, CoordinatorBoard, UICollectionViewDelegate, UICollectionViewDataSource {
     
+  
+    @IBOutlet weak var nextButton: CustomButton!
+    
     @IBOutlet weak var imageCollectionView: UICollectionView!
-    @IBOutlet weak var sliderStackView: UIStackView!
     weak var mainCoordinator: MainCoordinator?
     var imgArr = [
         "img1",
@@ -35,11 +37,9 @@ class OnBoardingScreen1ViewController: UIViewController, CoordinatorBoard, UICol
     }
     func scrollCollectionViews() {
 
-        // CollectionView 1 → Left to Right
         let offset1 = imageCollectionView.contentOffset
         let nextOffset1 = CGPoint(x: offset1.x + 1.0, y: offset1.y)
 
-        // CollectionView 2 → Right to Left
         let offset2 = imageCollectionView2.contentOffset
         let nextOffset2 = CGPoint(x: offset2.x - 1.0, y: offset2.y)
 
@@ -91,10 +91,7 @@ class OnBoardingScreen1ViewController: UIViewController, CoordinatorBoard, UICol
     @IBAction func skipButtonTapped(_ sender: Any) {
         mainCoordinator?.skipButtonTapped()
     }
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        mainCoordinator?.onBoardingScreen1NextButtonTapped()
-        
-    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -102,7 +99,12 @@ class OnBoardingScreen1ViewController: UIViewController, CoordinatorBoard, UICol
         imageCollectionView.dataSource = self
         imageCollectionView2.delegate = self
         imageCollectionView2.dataSource = self
+        nextButton.onTap = {
+            self.mainCoordinator?.onBoardingScreen1NextButtonTapped()
+        }
+
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startAutoScroll()

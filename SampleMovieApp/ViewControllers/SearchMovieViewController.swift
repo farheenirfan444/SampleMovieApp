@@ -10,13 +10,14 @@ import UIKit
 class SearchMovieViewController: UIViewController, CoordinatorBoard {
     
     var viewModel = MovieViewModel()
+    @IBOutlet weak var searchResultLabel: UILabel!
     
-
     @IBAction func searchButtontapped(_ sender: Any) {
         guard let query = searchTextField.text, !query.isEmpty else {
             return
         }
-        viewModel.searchMovies(query: query)
+      viewModel.searchMovies(query: query)
+        
         print(query)
     }
     @IBOutlet weak var recentSearchCollectionView: UICollectionView!
@@ -32,6 +33,8 @@ class SearchMovieViewController: UIViewController, CoordinatorBoard {
         viewModel.onMoviesUpdated = { [weak self] in
             DispatchQueue.main.async{
                 self?.recentSearchCollectionView.reloadData()
+                self?.searchResultLabel.text = "Search Result"
+                
             }
         }
     }

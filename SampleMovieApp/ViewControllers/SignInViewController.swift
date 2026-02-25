@@ -18,42 +18,15 @@ class SignInViewController: UIViewController, CoordinatorBoard {
     let imageIcon = UIImageView()
     
     
-
+    @IBOutlet weak var signInButtonTapped: CustomButton!
+    
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBAction func signUpButtonTapped(_ sender: Any) {
         mainCoordinator?.signUpButtonTapped()
     }
-    @IBAction func signInButtonTapped(_ sender: Any) {
-        guard let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
-                  print("Credentials not valid.")
-            return
-        }
-        let user = findUser(byEmail: email)
-       if user == nil {
-            print("User does not exist")
-        }
-        let securePassword = SecurityManager.getPassword(account: email)
-        if user?.password == password {
-            print("Sign in successful")
-            let loggedInUser = LoggedInUser(
-                email: user?.email ?? "",
-                name: user?.name ?? ""
-            )
-            UserSessionManager.shared.save(user: loggedInUser)
-            mainCoordinator?.signInButtonTapped()
-        }
-        else {
-            let alertController = UIAlertController(title: "Password Incorrect", message: "Enter correct password to proceed OR click forget password.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-
-            }
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
-            print("In correct Password")
-        }
-    }
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -65,12 +38,46 @@ class SignInViewController: UIViewController, CoordinatorBoard {
         contentView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
         self.navigationItem.hidesBackButton = true
+        signInButtonTapped.configureView(title: "Sign In")
+        signInButtonTapped.onTap = {
+            guard let email = self.emailTextField.text, !email.isEmpty,
+                  let password = self.passwordTextField.text, !password.isEmpty else {
+                      print("Credentials not valid.")
+                return
+            }
+            
+           let user = findUser(byEmail: email)
+           if user == nil {
+                print("User does not exist")
+            }
+            
+            let securePassword = SecurityManager.getPassword(account: email)
+            if self.passwordTextField.text == securePassword {
+                print("Sign in successful")
+                let loggedInUser = LoggedInUser(
+                    email: user?.email ?? "",
+                    name: user?.name ?? ""
+                )
+                UserSessionManager.shared.save(user: loggedInUser)
+                self.mainCoordinator?.signInButtonTapped()
+            }
+            else {
+                let alertController = UIAlertController(title: "Password Incorrect", message: "Enter correct password to proceed OR click forget password.", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+
+                }
+                alertController.addAction(okAction)
+//                present(alertController, animated: true, completion: nil)
+                print("In correct Password")
+            }
+        }
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         emailTextField.frame = emailTextField.frame.integral
         passwordTextField.frame = passwordTextField.frame.integral
     }
+    
 }
 
 func loginSuccess(user: User) {

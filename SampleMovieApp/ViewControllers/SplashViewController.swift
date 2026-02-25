@@ -19,6 +19,7 @@ class SplashViewController: UIViewController,CoordinatorBoard  {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self else { return }
+            //self.mainCoordinator?.navigateToOnBoardingScreen()
 
             if UserSessionManager.shared.isLoggedIn {
                 self.mainCoordinator?.goToHomeScreen()

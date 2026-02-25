@@ -16,20 +16,24 @@ class SignUpViewController: UIViewController , CoordinatorBoard{
     @IBAction func signInButtonTapped(_ sender: Any) {
         mainCoordinator?.signInButtonTappedFromSignUp()
     }
-    @IBAction func signUpButtonTappedOnSignUpScreen(_ sender: Any) {
-        guard let email = emailTextField.text, !email.isEmpty, email.isValidEmail,
-              let password = passwordTextField.text, !password.isEmpty, password.isValidPassword else {
-            print ("Credentials not valid")
-            return
-        }
-       
-        mainCoordinator?.goToSignUpSucessfulScreen(email: email, password: password)
-    }
+    
+    @IBOutlet weak var signUpButtonTapped: CustomButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         styleTextField(emailTextField)
         styleTextField(passwordTextField)
+        signUpButtonTapped.configureView(title: "Sign Up")
+        signUpButtonTapped.onTap = {
+            guard let email = self.emailTextField.text, !email.isEmpty, email.isValidEmail,
+                  let password = self.passwordTextField.text, !password.isEmpty, password.isValidPassword else {
+                print ("Credentials not valid")
+                return
+            }
+           
+            self.mainCoordinator?.goToSignUpSucessfulScreen(email: email, password: password)
+        }
     }
 }
 private func styleTextField(_ textField: UITextField) {

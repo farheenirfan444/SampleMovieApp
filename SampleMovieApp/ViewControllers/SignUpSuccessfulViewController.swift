@@ -21,25 +21,29 @@ class SignUpSuccessfulViewController: UIViewController, CoordinatorBoard {
     var password: String?
     
     
-    @IBAction func continueButtonTapped(_ sender: Any) {
-        guard let name = nameTextField.text, !name.isEmpty,
-              let phone = phoneNumberTextField.text, !phone.isEmpty,
-              let city = cityTextField.text, !city.isEmpty
-        else {
-            print("Enter data to sign up")
-           return
-        }
-        SecurityManager.savePassword(password: password!, account: email!)
-        createUser(email: email!, password: "", name: name, phone: phone, city: city)
-        mainCoordinator?.signInButtonTapped()
-       fetchUser()
-    }
+    
+    @IBOutlet weak var continueButton: CustomButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         styleTextField(nameTextField)
         styleTextField(phoneNumberTextField)
         styleTextField(cityTextField)
         self.navigationItem.hidesBackButton = true
+        continueButton.configureView(title: "Continue")
+        continueButton.onTap = {
+            guard let name = self.nameTextField.text, !name.isEmpty,
+                  let phone = self.phoneNumberTextField.text, !phone.isEmpty,
+                  let city = self.cityTextField.text, !city.isEmpty
+            else {
+                print("Enter data to sign up")
+               return
+            }
+            SecurityManager.savePassword(password: self.password!, account: self.email!)
+            createUser(email: self.email!, password: "", name: name, phone: phone, city: city)
+            self.mainCoordinator?.signInButtonTapped()
+           fetchUser()
+        }
         
     }
 }

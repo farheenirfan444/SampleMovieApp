@@ -12,6 +12,7 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
     @IBOutlet var genreButtons: [UIButton]!
     var selectedGenres: [String] = []
 
+    @IBOutlet weak var nextButton: CustomButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,18 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
             }
         }
         self.navigationItem.hidesBackButton = true
+        nextButton.onTap = {
+            if(self.selectedGenres.count > 0){
+                UserDefaults.standard.set(self.selectedGenres, forKey: "UserFavoriteGenres")
+                print(self.selectedGenres)
+                self.mainCoordinator?.onBoardingScreen2NextButtonTapped()
+            }
+            else {
+                Popup.show(on: self, title: "Oops!", message: "Select at least one genre!")
+            }
+        }
+        
+        
     }
     
     @IBAction func genreButtonTapped(_ sender: UIButton) {
@@ -78,18 +91,4 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
                
             }
         }
-   
-        @IBAction func nextButtonTapped(_ sender: UIButton) {
-            if(selectedGenres.count > 0){
-                UserDefaults.standard.set(selectedGenres, forKey: "UserFavoriteGenres")
-                print(selectedGenres)
-                mainCoordinator?.onBoardingScreen2NextButtonTapped()
-            }
-            else {
-                print("Select genre")
-            }
-            
-        }
-   
-
 }
