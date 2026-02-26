@@ -8,6 +8,7 @@
 import UIKit
 
 class SignInViewController: UIViewController, CoordinatorBoard {
+    let popup = PopUpView()
     weak var mainCoordinator : MainCoordinator?
     var defaults = UserDefaults.standard
     
@@ -42,13 +43,13 @@ class SignInViewController: UIViewController, CoordinatorBoard {
         signInButtonTapped.onTap = {
             guard let email = self.emailTextField.text, !email.isEmpty,
                   let password = self.passwordTextField.text, !password.isEmpty else {
-                      print("Credentials not valid.")
+                self.showPopUp(title: "Invalid Credentials", message: "Fill email and password field")
                 return
             }
             
            let user = findUser(byEmail: email)
            if user == nil {
-                print("User does not exist")
+               self.showPopUp(title: "User not found", message: "User does not exist")
             }
             
             let securePassword = SecurityManager.getPassword(account: email)
@@ -62,13 +63,7 @@ class SignInViewController: UIViewController, CoordinatorBoard {
                 self.mainCoordinator?.signInButtonTapped()
             }
             else {
-                let alertController = UIAlertController(title: "Password Incorrect", message: "Enter correct password to proceed OR click forget password.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-
-                }
-                alertController.addAction(okAction)
-//                present(alertController, animated: true, completion: nil)
-                print("In correct Password")
+                self.showPopUp(title: "Password incorrect", message: "Please enter correct password to proceed.")
             }
         }
     }
@@ -78,9 +73,15 @@ class SignInViewController: UIViewController, CoordinatorBoard {
         passwordTextField.frame = passwordTextField.frame.integral
     }
     
+    private func showPopUp(title: String, message: String){
+        popup.titleLabel.text = title
+        popup.messageLabel.text = message
+        popup.show(on: self)
+    }
+    
 }
 
-func loginSuccess(user: User) {
+private func loginSuccess(user: User) {
     let sessionUser = LoggedInUser(
         email: user.email ?? "",
         name: user.name ?? ""

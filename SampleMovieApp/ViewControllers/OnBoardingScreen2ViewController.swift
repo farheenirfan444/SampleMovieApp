@@ -73,11 +73,12 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
                 self.mainCoordinator?.onBoardingScreen2NextButtonTapped()
             }
             else {
-                Popup.show(on: self, title: "Oops!", message: "Select at least one genre!")
+               let popup = PopUpView()
+                popup.titleLabel.text = "Error"
+                popup.messageLabel.text = "Please select at least one genre"
+                popup.show(on: self)
             }
         }
-        
-        
     }
     
     @IBAction func genreButtonTapped(_ sender: UIButton) {

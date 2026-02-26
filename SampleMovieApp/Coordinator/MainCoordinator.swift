@@ -67,10 +67,10 @@ class MainCoordinator: Coordinator{
         homeVC.mainCoordinator = self
         self.navigationController?.pushViewController(homeVC, animated: true)
     }
-    func goToMovieDetailScreen(movieId: Int) {
-        let detailVC = MovieDetailViewController()
-        detailVC.configure(movieId: movieId)
-        self.navigationController?.pushViewController(detailVC, animated: true)
+    func goToMovieDetailScreen(movie: Movie) {
+        let vc = MovieDetailViewController.instantiateStoryBoard()
+        vc.viewModel = MovieDetailViewModel(movieId: movie.id)
+        navigationController?.pushViewController(vc, animated: true)
     }
     func goToSearchScreen() {
         let searchVC = SearchMovieViewController.instantiateStoryBoard()

@@ -25,8 +25,8 @@ class HomeViewController: UIViewController, CoordinatorBoard {
         movieCollectionView.dataSource = self
         movieCollectionView.delegate = self
         bindViewModel()
-        viewModel.fetchHomeMovies()
-        viewModel.getRequestWithAF()
+        viewModel.fetchMovies()
+        
     }
     private func bindViewModel() {
         viewModel.onMoviesUpdated = { [weak self] in
@@ -60,7 +60,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = viewModel.movie(at: indexPath.row)
+        self.mainCoordinator?.goToMovieDetailScreen(movie: movie)
+    }
 }
 
 

@@ -54,6 +54,10 @@ var numberOfMovies: Int {
 func movie(at index: Int) -> Movie {
     movies[index]
 }
+    func posterURL(for movie: Movie) -> URL? {
+        guard let path = movie.posterPath else { return nil }
+        return URL(string: "https://image.tmdb.org/t/p/w500\(path)")
+    }
 
 }
 

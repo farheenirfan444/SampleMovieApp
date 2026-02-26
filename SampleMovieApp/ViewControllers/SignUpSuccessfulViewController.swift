@@ -12,15 +12,13 @@ class SignUpSuccessfulViewController: UIViewController, CoordinatorBoard {
     weak var mainCoordinator: MainCoordinator?
     
     @IBOutlet weak var nameTextField: UITextField!
-    
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    
     @IBOutlet weak var cityTextField: UITextField!
+    
+    let popup = PopUpView()
     
     var email: String?
     var password: String?
-    
-    
     
     @IBOutlet weak var continueButton: CustomButton!
     
@@ -36,7 +34,9 @@ class SignUpSuccessfulViewController: UIViewController, CoordinatorBoard {
                   let phone = self.phoneNumberTextField.text, !phone.isEmpty,
                   let city = self.cityTextField.text, !city.isEmpty
             else {
-                print("Enter data to sign up")
+                self.popup.titleLabel.text = "Input fields empty"
+                self.popup.messageLabel.text = "Please fill in all the fields"
+                self.popup.show(on: self)
                return
             }
             SecurityManager.savePassword(password: self.password!, account: self.email!)

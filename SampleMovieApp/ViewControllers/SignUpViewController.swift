@@ -8,6 +8,7 @@
 import UIKit
 
 class SignUpViewController: UIViewController , CoordinatorBoard{
+    let popup = PopUpView()
     weak var mainCoordinator: MainCoordinator?
     weak var signUpSuccessfulViewController: SignUpSuccessfulViewController?
 
@@ -28,10 +29,11 @@ class SignUpViewController: UIViewController , CoordinatorBoard{
         signUpButtonTapped.onTap = {
             guard let email = self.emailTextField.text, !email.isEmpty, email.isValidEmail,
                   let password = self.passwordTextField.text, !password.isEmpty, password.isValidPassword else {
-                print ("Credentials not valid")
+                self.popup.titleLabel.text = "Invalid Credentials"
+                self.popup.messageLabel.text = "Please enter a valid email and password"
+                self.popup.show(on: self)
                 return
             }
-           
             self.mainCoordinator?.goToSignUpSucessfulScreen(email: email, password: password)
         }
     }
