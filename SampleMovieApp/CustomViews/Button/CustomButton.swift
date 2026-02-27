@@ -11,11 +11,14 @@ import UIKit
 
 final class CustomButton: UIView {
     
+    //MARK: @IBOutlets
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    //MARK: Variables
     var onTap: (() -> Void)?
     
-    @IBOutlet weak var contentView: UIView!
-    
-   
+    //MARK: Initializers
     override init(frame : CGRect) {
         super.init(frame: frame)
         self.configureView()
@@ -25,24 +28,46 @@ final class CustomButton: UIView {
         super.init(coder: coder)
         self.configureView()
     }
-    
-    @IBOutlet weak var titleLabel: UILabel!
+    //MARK: MVVM
+    var customViewModel: CustomButtonViewModel? {
+        didSet {
+           bindViewModel()
+        }
+    }
+}
+
+extension CustomButton {
+    //MARK: Helper functions
     private func configureView() {
-        let bundle = Bundle(for: CustomButton.self)
-        bundle.loadNibNamed("CustomButton", owner: self, options: nil)
-       
-        contentView.frame = self.bounds
-        self.addSubview(contentView)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        self.addGestureRecognizer(tap)
-        self.isUserInteractionEnabled = true
-        self.contentView.isUserInteractionEnabled = true
+        loadNib()
+        attachContentView()
+        setUpInteraction()
     }
     
-    func configureView(title:String){
-        titleLabel.text = title
+    private func loadNib() {
+        let bundle = Bundle(for: CustomButton.self)
+        let nibName = String(describing: CustomButton.self)
+        bundle.loadNibNamed(nibName, owner: self, options: nil)
     }
+    
+    private func attachContentView() {
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(contentView)
+    }
+    
+    private func setUpInteraction() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        addGestureRecognizer(tapGesture)
+        isUserInteractionEnabled = true
+        contentView.isUserInteractionEnabled = true
+    }
+    
     @objc private func handleTap() {
         onTap?()
     }
+    private func bindViewModel() {
+        titleLabel.text = customViewModel?.title
+    }
+    
 }
