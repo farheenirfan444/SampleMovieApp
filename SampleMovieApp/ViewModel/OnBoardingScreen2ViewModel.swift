@@ -15,24 +15,27 @@ final class OnBoarding2ScreenViewModel {
     var onSelectionChanged: (() -> Void)?
     let defaults = UserDefaults.standard
     
-    
+    //MARK: Functions
     func addGenre(genre: String) {
         if selectedGenres.contains(genre) {
             selectedGenres.removeAll { $0 == genre }
-            return
         }
         else {
             selectedGenres.append(genre)
         }
         onSelectionChanged?()
     }
+    
     func isGenreSelected(genre: String) -> Bool {
        return selectedGenres.contains(genre)
     }
+    
     func saveGenres() {
         defaults.set(selectedGenres, forKey: "UserFavoriteGenres")
+        UserPreferenceManager.shared.savePreferences(selectedGenres)
     }
-    func selectedGenresCount() -> Int {
+    
+    var selectedGenresCount: Int{
         return selectedGenres.count
     }
 }

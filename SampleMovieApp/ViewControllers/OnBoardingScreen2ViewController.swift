@@ -20,8 +20,9 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
     //MARK: Variables
     
     weak var mainCoordinator: MainCoordinator?
-    var selectedGenres: [String] = []
     var viewModel = OnBoarding2ScreenViewModel()
+    let popUp = PopUpView()
+    let popUpViewModel = PopUpViewModel(titleLabel: "Genre Not Selected", messageLabel: "Select at least one genre to move forward.")
     
     //MARK: Lifecycle Methods
     
@@ -29,15 +30,21 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         
+        bindViewModel()
+        
         setUpGenreButton()
+        setUpNextButton()
+    }
+    private func bindViewModel() {
         viewModel.onSelectionChanged = { [weak self] in
             self?.updateButtonSelectionStates()
         }
+    }
+    private func setUpNextButton() {
         nextButton.onTap = { [weak self] in
             guard let self = self else { return }
-            setUpNextButton()
+            nextButtonTapped()
         }
-        
     }
     private func updateButtonSelectionStates() {
         for button in genreButtons {
@@ -98,13 +105,13 @@ class OnBoardingScreen2ViewController: UIViewController, CoordinatorBoard {
             }
         }
     }
-    private func setUpNextButton() {
-        if(self.viewModel.selectedGenresCount() > 0){
+    private func nextButtonTapped() {
+        if(self.viewModel.selectedGenresCount > 0){
             self.viewModel.saveGenres()
-            self.mainCoordinator?.onBoardingScreen2NextButtonTapped()
+            self.mainCoordinator?.goToSignInScreen()
         }
         else {
-            print("Select at least one genre.")
+            popUp.show(on: self, viewModel: popUpViewModel)
         }
     }
 }

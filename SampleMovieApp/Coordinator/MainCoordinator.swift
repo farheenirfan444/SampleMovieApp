@@ -19,61 +19,62 @@ class MainCoordinator: Coordinator{
         let splashVC = SplashViewController.instantiateStoryBoard()
         splashVC.mainCoordinator = self
         self.navigationController?.pushViewController(splashVC, animated: true)
-        
     }
-    func navigateToOnBoardingScreen() {
+    
+    func goToOnBoardingScreen1() {
         let onBoardingVC = OnBoardingScreen1ViewController.instantiateStoryBoard()
         onBoardingVC.mainCoordinator = self
         self.navigationController?.pushViewController(onBoardingVC, animated: true)
     }
-    func onBoardingScreen1NextButtonTapped() {
+    
+    func goToOnBoardingScreen2() {
         let onBoardingScreen2VC = OnBoardingScreen2ViewController.instantiateStoryBoard()
         onBoardingScreen2VC.mainCoordinator = self
         self.navigationController?.pushViewController(onBoardingScreen2VC, animated: true)
         
     }
-    func onBoardingScreen2NextButtonTapped() {
+    
+    func goToSignInScreen() {
         let signInVC = SignInViewController.instantiateStoryBoard()
         signInVC.mainCoordinator = self 
         self.navigationController?.pushViewController(signInVC, animated: true)
     }
+    
     func skipButtonTapped(){
-        let homeVC = HomeViewController.instantiateStoryBoard()
-        self.navigationController?.pushViewController(homeVC, animated: true)
-    }
-    func signInButtonTapped() {
-        let homeVC = HomeViewController.instantiateStoryBoard()
-        self.navigationController?.pushViewController(homeVC, animated: true)
-    }
-    func signUpButtonTapped() {
-        let signUpVC = SignUpViewController.instantiateStoryBoard()
-        signUpVC.mainCoordinator = self
-        self.navigationController?.pushViewController(signUpVC, animated: true)
-    }
-    func signInButtonTappedFromSignUp() {
-        let loginVC = SignInViewController.instantiateStoryBoard()
-        loginVC.mainCoordinator = self
-        self.navigationController?.pushViewController(loginVC, animated: true)
-    }
-    func goToSignUpSucessfulScreen(email: String, password: String) {
-        let signUpSucessfulVC = SignUpSuccessfulViewController.instantiateStoryBoard()
-        signUpSucessfulVC.email = email
-        signUpSucessfulVC.password = password
-        signUpSucessfulVC.mainCoordinator = self
-        self.navigationController?.pushViewController(signUpSucessfulVC, animated: true)
-    }
-    func goToHomeScreen() {
         let homeVC = HomeViewController.instantiateStoryBoard()
         homeVC.mainCoordinator = self
         self.navigationController?.pushViewController(homeVC, animated: true)
     }
-    func goToMovieDetailScreen(movieId: Int) {
-        let detailVC = MovieDetailViewController()
-        detailVC.configure(movieId: movieId)
-        self.navigationController?.pushViewController(detailVC, animated: true)
+    
+    func goToSignUpScreen() {
+        let signUpVC = SignUpViewController.instantiateStoryBoard()
+        signUpVC.mainCoordinator = self
+        self.navigationController?.pushViewController(signUpVC, animated: true)
     }
+    
+    func goToSignUpSucessfulScreen(email: String, password: String) {
+        let signUpSucessfulVC = SignUpSuccessfulViewController.instantiateStoryBoard()
+        signUpSucessfulVC.viewModel = SignUpSuccessfulViewModel(email: email, password: password)
+        signUpSucessfulVC.mainCoordinator = self
+        self.navigationController?.pushViewController(signUpSucessfulVC, animated: true)
+    }
+    
+    func goToHomeScreen() {
+        let homeVC = HomeViewController.instantiateStoryBoard()
+        homeVC.mainCoordinator = self
+        homeVC.viewModel = MovieViewModel()
+        self.navigationController?.pushViewController(homeVC, animated: true)
+    }
+    
     func goToSearchScreen() {
         let searchVC = SearchMovieViewController.instantiateStoryBoard()
+        searchVC.mainCoordinator = self
         self.navigationController?.pushViewController(searchVC, animated: true)
+    }
+    
+    func goToMovieDetailScreen(movie: Movie) {
+        let vc = MovieDetailViewController.instantiateStoryBoard()
+        vc.viewModel = MovieDetailViewModel(movieId: movie.id)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
