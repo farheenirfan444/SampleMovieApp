@@ -55,11 +55,6 @@ class SignInViewController: UIViewController, CoordinatorBoard {
         }
     }
    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        emailTextField.frame = emailTextField.frame.integral
-        passwordTextField.frame = passwordTextField.frame.integral
-    }
     private func setUpPasswordToggle() {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "eye"), for: .normal)
@@ -78,9 +73,6 @@ class SignInViewController: UIViewController, CoordinatorBoard {
         passwordTextField.isSecureTextEntry = !isPasswordVisible
         let imageName = isPasswordVisible ? "eye.slash" : "eye"
         sender.setImage(UIImage(systemName: imageName), for: .normal)
-        let text = passwordTextField.text
-        passwordTextField.text = nil
-        passwordTextField.text = text
     }
     
 }

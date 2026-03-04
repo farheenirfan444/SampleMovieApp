@@ -71,9 +71,6 @@ class SignUpViewController: UIViewController , CoordinatorBoard{
         passwordTextField.isSecureTextEntry = !isPasswordVisible
         let imageName = isPasswordVisible ? "eye.slash" : "eye"
         sender.setImage(UIImage(systemName: imageName), for: .normal)
-        let text = passwordTextField.text
-        passwordTextField.text = nil
-        passwordTextField.text = text
     }
 }
 private func styleTextField(_ textField: UITextField) {
