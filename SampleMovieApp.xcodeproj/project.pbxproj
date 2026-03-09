@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F82197892F5ECBD500D6E5A2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = F82197882F5ECBD500D6E5A2 /* KeychainAccess */; };
+		F821978C2F5ECC0900D6E5A2 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F821978B2F5ECC0900D6E5A2 /* Alamofire */; };
+		F82197BC2F5EE1A800D6E5A2 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = F82197BB2F5EE1A800D6E5A2 /* Model */; };
+		F82197BF2F5EE22A00D6E5A2 /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = F82197BE2F5EE22A00D6E5A2 /* Navigation */; };
+		F82197C22F5EE27E00D6E5A2 /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = F82197C12F5EE27E00D6E5A2 /* Utilities */; };
+		F82197C62F5EE34F00D6E5A2 /* MovieDetail in Frameworks */ = {isa = PBXBuildFile; productRef = F82197C52F5EE34F00D6E5A2 /* MovieDetail */; };
+		F82197C82F5EE35300D6E5A2 /* UI in Frameworks */ = {isa = PBXBuildFile; productRef = F82197C72F5EE35200D6E5A2 /* UI */; };
 		F8ADEF0F2F4840F6005338A8 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADEF0E2F4840F6005338A8 /* User+CoreDataProperties.swift */; };
 		F8ADEF102F4840F6005338A8 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ADEF0D2F4840F6005338A8 /* User+CoreDataClass.swift */; };
-		F8ADEF7A2F4D9B0B005338A8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = F8ADEF792F4D9B0B005338A8 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +32,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F82197BA2F5EE17C00D6E5A2 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
+		F82197BD2F5EE1F500D6E5A2 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Navigation; sourceTree = "<group>"; };
+		F82197C02F5EE26000D6E5A2 /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
+		F82197C32F5EE29300D6E5A2 /* UI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UI; sourceTree = "<group>"; };
+		F82197C42F5EE30200D6E5A2 /* MovieDetail */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MovieDetail; sourceTree = "<group>"; };
 		F8ADEC692F409066005338A8 /* SampleMovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleMovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8ADEF0D2F4840F6005338A8 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F8ADEF0E2F4840F6005338A8 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -57,19 +68,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8ADEF7A2F4D9B0B005338A8 /* Alamofire in Frameworks */,
+				F82197BC2F5EE1A800D6E5A2 /* Model in Frameworks */,
+				F82197892F5ECBD500D6E5A2 /* KeychainAccess in Frameworks */,
+				F82197C62F5EE34F00D6E5A2 /* MovieDetail in Frameworks */,
+				F82197C82F5EE35300D6E5A2 /* UI in Frameworks */,
+				F82197BF2F5EE22A00D6E5A2 /* Navigation in Frameworks */,
+				F82197C22F5EE27E00D6E5A2 /* Utilities in Frameworks */,
+				F821978C2F5ECC0900D6E5A2 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F82197902F5ECF7C00D6E5A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F8ADEC602F409066005338A8 = {
 			isa = PBXGroup;
 			children = (
+				F82197C42F5EE30200D6E5A2 /* MovieDetail */,
+				F82197C32F5EE29300D6E5A2 /* UI */,
+				F82197C02F5EE26000D6E5A2 /* Utilities */,
+				F82197BD2F5EE1F500D6E5A2 /* Navigation */,
+				F82197BA2F5EE17C00D6E5A2 /* Model */,
 				F8ADEF0D2F4840F6005338A8 /* User+CoreDataClass.swift */,
 				F8ADEF0E2F4840F6005338A8 /* User+CoreDataProperties.swift */,
 				F8ADEC6B2F409066005338A8 /* SampleMovieApp */,
+				F82197902F5ECF7C00D6E5A2 /* Frameworks */,
 				F8ADEC6A2F409066005338A8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,7 +133,13 @@
 			);
 			name = SampleMovieApp;
 			packageProductDependencies = (
-				F8ADEF792F4D9B0B005338A8 /* Alamofire */,
+				F82197882F5ECBD500D6E5A2 /* KeychainAccess */,
+				F821978B2F5ECC0900D6E5A2 /* Alamofire */,
+				F82197BB2F5EE1A800D6E5A2 /* Model */,
+				F82197BE2F5EE22A00D6E5A2 /* Navigation */,
+				F82197C12F5EE27E00D6E5A2 /* Utilities */,
+				F82197C52F5EE34F00D6E5A2 /* MovieDetail */,
+				F82197C72F5EE35200D6E5A2 /* UI */,
 			);
 			productName = SampleMovieApp;
 			productReference = F8ADEC692F409066005338A8 /* SampleMovieApp.app */;
@@ -135,7 +171,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F8ADEF752F4D9340005338A8 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
-				F8ADEF782F4D9B0B005338A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				F82197872F5ECBD500D6E5A2 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				F821978A2F5ECC0900D6E5A2 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F8ADEC6A2F409066005338A8 /* Products */;
@@ -376,6 +413,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F82197872F5ECBD500D6E5A2 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		F821978A2F5ECC0900D6E5A2 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.11.1;
+			};
+		};
 		F8ADEF752F4D9340005338A8 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
@@ -384,21 +437,38 @@
 				minimumVersion = 1.2.1;
 			};
 		};
-		F8ADEF782F4D9B0B005338A8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.11.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F8ADEF792F4D9B0B005338A8 /* Alamofire */ = {
+		F82197882F5ECBD500D6E5A2 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F8ADEF782F4D9B0B005338A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = F82197872F5ECBD500D6E5A2 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+		F821978B2F5ECC0900D6E5A2 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F821978A2F5ECC0900D6E5A2 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		F82197BB2F5EE1A800D6E5A2 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
+		};
+		F82197BE2F5EE22A00D6E5A2 /* Navigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Navigation;
+		};
+		F82197C12F5EE27E00D6E5A2 /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utilities;
+		};
+		F82197C52F5EE34F00D6E5A2 /* MovieDetail */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MovieDetail;
+		};
+		F82197C72F5EE35200D6E5A2 /* UI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
