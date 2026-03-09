@@ -7,8 +7,11 @@
 
 import Foundation
 import Alamofire
+import Model
+import Utilities
 
-final class MovieDetailViewModel {
+
+public final class MovieDetailViewModel {
     private let apiKey = "9b171df651373fbef57d316b5b943cdf"
     private let baseUrl = "https://api.themoviedb.org/3"
     private let movieId: Int
@@ -17,6 +20,7 @@ final class MovieDetailViewModel {
     var cast: [Cast] = []
     var onMovieDetailUpdated: (() -> Void)?
     var onCastUpdated: (() -> Void)?
+    let imageBaseUrl = "https://image.tmdb.org/t/p/w500"
     
     init(movieId: Int) {
         self.movieId = movieId

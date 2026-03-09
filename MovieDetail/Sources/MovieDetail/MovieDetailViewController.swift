@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import ReusableUI
+import Model
+import Utilities
+import Coordinators
 
-class MovieDetailViewController: UIViewController, CoordinatorBoard {
+@available(iOS 13.0, *)
+public class MovieDetailViewController: UIViewController, CoordinatorBoard {
     //MARK: IBOutlets
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,10 +29,10 @@ class MovieDetailViewController: UIViewController, CoordinatorBoard {
     @IBOutlet weak var bookButton: CustomButton!
     
     //MARK: Variables
-    var viewModel: MovieDetailViewModel!
-    let baseURL = "https://image.tmdb.org/t/p/w500"
+    public var viewModel: MovieDetailViewModel!
     
-    override func viewDidLoad() {
+    
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         bindViewModel()
@@ -37,19 +42,16 @@ class MovieDetailViewController: UIViewController, CoordinatorBoard {
         viewModel.fetchCast()
     }
     
-    private func bindViewModel() {
+    public func bindViewModel() {
         viewModel.onMovieDetailUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                self?.populateData()
-            }
+            self?.populateData()
         }
         viewModel.onCastUpdated = { [weak self] in
-            DispatchQueue.main.async {
-                self?.showCastImages()
-            }
+           self?.showCastImages()
         }
     }
-    private func populateData() {
+    
+    public func populateData() {
         guard let movie = viewModel.movieDetails else { return }
         titleLabel.text = movie.title
         storyTextView.text = movie.overview
@@ -57,22 +59,22 @@ class MovieDetailViewController: UIViewController, CoordinatorBoard {
         durationLabel.text = "\(movie.runtime!) min"
         censorRatingLabel.text = "PG-13"
         let imagePath = movie.posterPath
-        let imageURL = baseURL + (imagePath ?? "")
+        let imageURL = viewModel.imageBaseUrl + (imagePath ?? "")
         posterImageView.loadImage(from: imageURL)
         genresLabel.text = movie.genres.map{ $0.name }.joined(separator: ", ")
     }
     
-    private func setUpBookButton() {
+    public func setUpBookButton() {
         let buttonViewModel = CustomButtonViewModel(title: "Book")
         bookButton.customViewModel = buttonViewModel
     }
     
-    private func showCastImages() {
+    public func showCastImages() {
         let imageViews = [castImage1, castImage2, castImage3, castImage4]
         for (index, imageView) in imageViews.enumerated() {
             if index < viewModel.cast.count,
                let profilePath = viewModel.cast[index].profilePath {
-                let imageURL = baseURL + profilePath
+                let imageURL = viewModel.imageBaseUrl + profilePath
                 imageView?.loadImage(from: imageURL)
             } else {
                 imageView?.image = UIImage(systemName: "person.circle")

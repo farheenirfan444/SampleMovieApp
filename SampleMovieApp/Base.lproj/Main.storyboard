@@ -149,7 +149,7 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="Bif-nq-P56">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailViewController" id="0gn-wA-4ly" customClass="MovieDetailViewController" customModule="SampleMovieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailViewController" id="0gn-wA-4ly" customClass="MovieDetailViewController" customModule="MovieDetail" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0f6-fb-ZGW">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
