@@ -8,28 +8,69 @@
 import UIKit
 
 class SignUpViewController: UIViewController , CoordinatorBoard{
-    weak var mainCoordinator: MainCoordinator?
-    weak var signUpSuccessfulViewController: SignUpSuccessfulViewController?
-
+    //MARK: IBOutlet
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBAction func signInButtonTapped(_ sender: Any) {
-        mainCoordinator?.signInButtonTappedFromSignUp()
+        mainCoordinator?.goToSignInScreen()
     }
-    @IBAction func signUpButtonTappedOnSignUpScreen(_ sender: Any) {
-        guard let email = emailTextField.text, !email.isEmpty, email.isValidEmail,
-              let password = passwordTextField.text, !password.isEmpty, password.isValidPassword else {
-            print ("Credentials not valid")
-            return
-        }
-       
-        mainCoordinator?.goToSignUpSucessfulScreen(email: email, password: password)
-    }
+    @IBOutlet weak var signUpButtonTapped: CustomButton!
+    
+    //MARK: Variables
+    weak var mainCoordinator: MainCoordinator?
+    var viewModel = SignUpViewModel()
+    private var isPasswordVisible = false
+    let buttonViewModel = CustomButtonViewModel(title: "Sign Up")
+    let popUp = PopUpView()
+    
+    //MARK: Lifecycle Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
+        
+        setUpUI()
+        setUpSignUpButton()
+    }
+    
+    //MARK: Helper functions
+    private func setUpUI() {
+        setUpPasswordToggle()
         styleTextField(emailTextField)
         styleTextField(passwordTextField)
+    }
+    
+    private func setUpSignUpButton() {
+        signUpButtonTapped.customViewModel = buttonViewModel
+        signUpButtonTapped.onTap = { [weak self] in
+            guard let self = self else { return }
+            let result = self.viewModel.signUp(email: self.emailTextField.text, password: self.passwordTextField.text)
+            if (result.success) {
+                self.mainCoordinator?.goToSignUpSucessfulScreen(email: self.emailTextField.text!, password: self.passwordTextField.text!)
+            }
+            else {
+                let popUpViewModel = PopUpViewModel(titleLabel: "Sign Up Failed", messageLabel: result.message)
+                self.popUp.show(on: self, viewModel: popUpViewModel)
+            }
+        }
+    }
+    private func setUpPasswordToggle() {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "eye"), for: .normal)
+        button.tintColor = .gray
+        button.frame = CGRect(x: 0, y: 0, width: 44, height: 24)
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        let container = UIView(frame: CGRect(x: -4, y: 0, width: 44, height: 24))
+        button.center = container.center
+        container.addSubview(button)
+        passwordTextField.rightView = container
+        passwordTextField.rightViewMode = .always
+        
+    }
+    @objc private func togglePasswordVisibility(_ sender: UIButton) {
+        isPasswordVisible.toggle()
+        passwordTextField.isSecureTextEntry = !isPasswordVisible
+        let imageName = isPasswordVisible ? "eye.slash" : "eye"
+        sender.setImage(UIImage(systemName: imageName), for: .normal)
     }
 }
 private func styleTextField(_ textField: UITextField) {
@@ -45,6 +86,6 @@ private func styleTextField(_ textField: UITextField) {
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textField.frame.height))
     textField.leftView = paddingView
     textField.leftViewMode = .always
-    textField.clipsToBounds = true
 }
+
 

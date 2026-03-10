@@ -8,10 +8,13 @@
 import Foundation
 
 final class UserSessionManager {
+    //MARK: Variables
     let defaults = UserDefaults.standard
     static let shared = UserSessionManager()
     private init() {}
     private let userKey = "logged_in_user"
+    
+    //MARK: functions
     
     func save(user: LoggedInUser) {
         if let data = try? JSONEncoder().encode(user) {

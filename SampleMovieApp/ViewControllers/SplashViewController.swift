@@ -8,10 +8,6 @@
 import UIKit
 
 class SplashViewController: UIViewController,CoordinatorBoard  {
-    var defaults = UserDefaults.standard
-    struct Keys {
-        static let user = "user"
-    }
 
     weak var mainCoordinator: MainCoordinator?
     override func viewDidLoad() {
@@ -19,11 +15,10 @@ class SplashViewController: UIViewController,CoordinatorBoard  {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
             guard let self else { return }
-
             if UserSessionManager.shared.isLoggedIn {
                 self.mainCoordinator?.goToHomeScreen()
             } else {
-                self.mainCoordinator?.navigateToOnBoardingScreen()
+                self.mainCoordinator?.goToOnBoardingScreen1()
             }
         }
     }

@@ -20,7 +20,6 @@ extension User{
 
     @NSManaged public var id: UUID?
     @NSManaged public var email: String?
-    @NSManaged public var password: String?
     @NSManaged public var preferences: String?
     @NSManaged public var name: String?
     @NSManaged public var phoneNumber: String?

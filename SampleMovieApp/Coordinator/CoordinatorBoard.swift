@@ -11,9 +11,7 @@ import UIKit
 
 protocol CoordinatorBoard: UIViewController {
     static func instantiateStoryBoard() -> Self
-    
 }
-
 extension CoordinatorBoard {
     static func instantiateStoryBoard() -> Self
     {

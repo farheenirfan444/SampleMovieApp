@@ -9,7 +9,7 @@ import UIKit
 
 class MovieHomeScreenCellCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var posterImage: UIView!
+    @IBOutlet weak var posterImage: UIImageView!
     
     @IBAction func playButton(_ sender: Any) {
         print("I am clicked.")
